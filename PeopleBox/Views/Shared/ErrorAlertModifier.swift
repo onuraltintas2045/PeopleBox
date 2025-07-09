@@ -7,8 +7,24 @@
 
 import SwiftUI
 
-struct ErrorAlertModifier: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+struct ErrorAlertModifier: ViewModifier {
+    @Binding var errorMessage: String?
+
+    func body(content: Content) -> some View {
+        content
+            .alert("Error", isPresented: Binding(
+                get: { errorMessage != nil },
+                set: { newValue in
+                    if !newValue {
+                        DispatchQueue.main.async {
+                            errorMessage = nil
+                        }
+                    }
+                }
+            )) {
+                Button("OK", role: .cancel) { errorMessage = nil }
+            } message: {
+                Text(errorMessage ?? "")
+            }
     }
 }

@@ -8,7 +8,23 @@
 import SwiftUI
 
 struct MainTabView: View {
+    
+    // MARK: - Properties
+    @EnvironmentObject var viewModel: MainTabViewModel
+    @StateObject private var favoritesViewModel = FavoriteUsersVM()
+
+    // MARK: - Body
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        TabView {
+            // MARK: - Users Tab
+            UserListView()
+                .tabItem { Label("Users", systemImage: "person.3") }
+
+            // MARK: - Favorites Tab
+            FavoriteUsersView(viewModel: favoritesViewModel)
+                .tabItem { Label("Favorites", systemImage: "heart.fill") }
+        }
+        .loadingOverlay(viewModel.isLoading)
+        .errorAlert($viewModel.errorMessage)
     }
 }

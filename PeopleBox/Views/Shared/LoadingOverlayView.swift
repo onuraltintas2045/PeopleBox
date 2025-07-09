@@ -8,7 +8,24 @@
 import SwiftUI
 
 struct LoadingOverlayView: View {
+    private let isVisible: Bool
+
+    init(isVisible: Bool = true) {
+        self.isVisible = isVisible
+    }
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        if isVisible {
+            ZStack {
+                Color.black.opacity(0.4)
+                    .ignoresSafeArea()
+
+                ProgressView()
+                    .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                    .scaleEffect(2)
+            }
+            .transition(.opacity)
+            .animation(.easeInOut(duration: 0.3), value: isVisible)
+        }
     }
 }

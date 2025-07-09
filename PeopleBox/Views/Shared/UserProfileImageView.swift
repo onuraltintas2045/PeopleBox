@@ -5,10 +5,24 @@
 //  Created by Onur Altintas on 9.07.2025.
 //
 
+import Kingfisher
 import SwiftUI
 
 struct UserProfileImageView: View {
+    let imageUrl: String
+    let imageSize: CGFloat
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        KFImage(URL(string: imageUrl))
+            .placeholder {
+                Image(systemName: "person")
+                    .resizable()
+                    .scaledToFit()
+                    .foregroundColor(.gray.opacity(0.6))
+                    .background(Color.gray.opacity(0.2))
+            }
+            .resizable()
+            .scaledToFit()
+            .frame(width: imageSize, height: imageSize)
     }
 }
