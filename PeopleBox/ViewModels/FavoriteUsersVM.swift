@@ -9,9 +9,11 @@ import Foundation
 
 @MainActor
 class FavoriteUsersVM: ObservableObject {
+    // MARK: - Properties
     @Published var selectedUserIDs: Set<String> = []
     @Published var selectionMode: Bool = false
 
+    // MARK: - Selection Management
     func toggleSelectionMode() {
         selectionMode.toggle()
         if !selectionMode {
