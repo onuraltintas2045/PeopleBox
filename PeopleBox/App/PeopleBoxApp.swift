@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct PeopleBoxApp: App {
@@ -13,5 +14,6 @@ struct PeopleBoxApp: App {
         WindowGroup {
             ContentView()
         }
+        .modelContainer(for: FavoriteUser.self)
     }
 }
