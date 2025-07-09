@@ -43,18 +43,6 @@ class FavoriteUserRepository {
         }
     }
 
-    func isFavoriteUser(_ user: User) throws -> Bool {
-        let descriptor = FetchDescriptor<FavoriteUser>(
-            predicate: #Predicate { $0.id == user.id }
-        )
-        do {
-            let results = try context.fetch(descriptor)
-            return !results.isEmpty
-        } catch {
-            throw FavUserRepoError.fetchFailed
-        }
-    }
-
     func fetchFavorites() throws -> [FavoriteUser] {
         let descriptor = FetchDescriptor<FavoriteUser>()
         do {

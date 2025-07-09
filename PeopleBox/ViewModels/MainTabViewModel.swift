@@ -57,7 +57,7 @@ class MainTabViewModel: ObservableObject {
         errorMessage = nil
 
         do {
-            if try repository.isFavoriteUser(user) {
+            if isFavoriteUser(user) {
                 try repository.removeFromFavorites(user)
             } else {
                 try repository.addToFavorites(user)
@@ -79,7 +79,7 @@ class MainTabViewModel: ObservableObject {
     }
 
     func isFavoriteUser(_ user: User) -> Bool {
-        (try? repository.isFavoriteUser(user)) ?? false
+        return favoriteUsers.contains { $0.id == user.id }
     }
 
     func filteredUsers(searchText: String) -> [User] {
